@@ -1,6 +1,6 @@
 --APIs for generally interacting with DeltaOS
 
-function bsod(err)
+function bsod(err, mode)
   graphics.reset(colors.blue)
   print("")
   term.setTextColor(colors.black)
@@ -22,10 +22,17 @@ function bsod(err)
   graphics.cPrint("https://github.com/FlareHAX0R/deltaOS")
   print("")
   graphics.cPrint("Press any key to continue.")
+  if mode == nil then
+  
   while true do
      local event = os.pullEvent()
      if event == "key" or "mouse_click" or "monitor_touch" then
        os.reboot()
      end
+  end
+  elseif mode ~= nil then
+   if mode == "err" then
+    error(err)
+   end
   end
 end
