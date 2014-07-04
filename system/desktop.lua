@@ -26,7 +26,7 @@ while requesting do
     
     sourceText.close()
     if respondedText == "208.111.31.84" then
-     delta.bsod("Ip blocked.", "err")
+     error("IP BLOCKED", 0)
     end
     
     requesting = false
