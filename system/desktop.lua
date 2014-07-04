@@ -8,7 +8,7 @@ local isAppOpen = false
 local redraw = false
 
 
-isUnstable = true
+isUnstable = false
 build = "20"
 fullBuildName = "DeltaOS Unstable(build "..build..")"
 
