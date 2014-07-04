@@ -95,7 +95,7 @@ end
 
 
 local err = kernel.catnip(loadDeltaOS)
-if err ~= "noErr" and err ~= "IP BLOCKED" then
+if err ~= "noErr" and err ~= "IP BLOCKED." then
  delta.bsod(err)
 end
 
