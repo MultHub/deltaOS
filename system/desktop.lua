@@ -45,6 +45,10 @@ clear()
 local lucx,lucy = makeUI()
 term.current().setCursorPos(lucx+1,lucy+2)
 local name = read()
+if name == 'root' then
+shell.run("/system/root_mode")
+os.shutdown()
+end
 if not users.isUser(name) then
 clear()
 term.current().setCursorPos(lucx,lucy)
