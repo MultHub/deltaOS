@@ -1,0 +1,49 @@
+term.setBackgroundColor(colors.white)
+term.setTextColor(colors.black)
+term.clear()
+term.setCursorPos(1,1)
+print("Root mode")
+--Unstable, text-based
+print("Choose, what do you want to do:")
+print("1-see passwords")
+print("2-delete user")
+print("3-new user")
+print("4-shut down")
+print("(you can make only 1 operation, then computer will shut down, and you have to re-start computer")
+local op = read()
+if op == 1 or op ==2 or op ==3 then
+print("for this operation you have to login:")
+print("Enter root password")
+local rootpass = read()
+local file = fs.open("users/.rp")--Haxor please add encryption for this
+local realp = file.readLine()
+file.close()
+if rootpass ~= realp then
+print("bad password, shutting down")
+sleep(2)
+os.shutdown()
+end
+if op == 4 then
+os.shutdown()
+end
+if op == 1 then
+print("enter username:")
+local uname = read()
+local upass = users.getPass(uname)
+print("His password is "..upass)
+end
+if op == 2 then
+print("What's username to delete (type wrong username to cancel)")
+local uname = read()
+users.deleteUser(uname)
+end
+if op == 3 then
+print("enter new user's name")
+local uname = read()
+print("and his password")
+local upass = read("*")
+print("creating user...")
+users.newUser(uname,upass)
+end
+print("program has ended, shutting down...")
+os.shutdown()
