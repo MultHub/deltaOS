@@ -1,7 +1,9 @@
 --THANK YOU ASSOSSAGPG FOR FINDING MANY TYPOS AND ERRORS IN HERE.
+--THANKS INCINIRATE FOR SOME FUNCTIONS!
 
 
 x, y = term.current().getSize()
+  
 
 function httpDownload(url, path)
  local data = http.get(url)
@@ -9,6 +11,57 @@ function httpDownload(url, path)
  file.write(data.readAll())
  file.close()
 end
+
+function inSpan(x1,y1,x2,y2,x3,y3)
+ if x3>=x1 and x3<=x2 then
+  if y3>=y1 and y3<=y2 then
+   return true
+  end
+ end
+ return false
+end
+
+function saveToFile( oObj, pPath )
+ local file = fs.open(pPath,"w")
+ if file then
+  local ty = type(oObj)
+  if ty == "table" then
+   file.write(textutils.serialize(oObj))
+  elseif ty == "string" then
+   file.write(oObj)
+  elseif ty == "number" then
+   file.write(tostring(oObj))
+  else
+   return false,"Invalid Data Type"
+  end
+  file.close()
+  return true,"Done"
+ else
+  return false,"Invalid Path"
+ end
+end
+
+function getFromFile( pPath )
+ local file = fs.open(pPath,"r")
+ if file then
+  oObj=file.readAll()
+  local ty = type(oObj)
+  if ty == "table" then
+   return textutils.unserialize(oObj)
+  elseif ty == "string" then
+   return oObj
+  elseif ty == "number" then
+   return tonumber(oObj)
+  else
+   return false,"Unrecognized Data Type"
+  end
+  file.close()
+  return true,"Done"
+ else
+  return false,"Invalid Path"
+ end
+end
+
 
 function clickEvent(xA, yA, button)
  local event, button1, x1 , y1 = os.pullEvent("mouse_click")
@@ -19,22 +72,7 @@ function clickEvent(xA, yA, button)
  end
 end
 
-function spanClickEvent(x1, y1, x2, y2, button1) 
- local event, button, xB, yB = os.pullEvent("mouse_click")
- if x1 <= xB and y1 <= yB then
-  if x2 >= xB and y2 >= yB then
-   if button1 == button then
-    return true
-   else
-    return false
-   end
-  else
-   return false
-  end
- else
-  return false
- end
-end
+
 
 function reset()
  term.current().clear()
@@ -55,18 +93,27 @@ function protectedRead()
  return data
 end
 
-function drawLine(y1, color)
- paintutils.drawLine(1, y, x, y1, color)
+function drawLine(cy, color)
+ paintutils.drawLine(1, cy, x, cy, color)
 end
 
 
 function catnip(func, ...)
  -- Error-free function-running function. Good for debugging OR BSoDs.
  -- Thanks MKLego and eliasrg2 and for this.
+ 
  local ok, err = pcall(func, ...)
  if ok == false and err ~= nil then
   return err
  else
   return "noErr"
  end
+end
+
+function extendedCatnip(func, ...)
+  os.loadAPI("/apis/delta")
+  local err = catnip(func, ...)
+  if err ~= "noErr" then
+    delta.bsod(err)
+  end
 end

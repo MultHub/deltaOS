@@ -1,0 +1,32 @@
+
+
+function getSetting(setting, number)
+ local get = fs.open("/home/settings/"..setting, "r")
+ local settings = textutils.unserialize( get.readAll() )
+ get.close()
+ if number ~= nil then
+  return settings[number]
+ elseif number == nil then
+  return settings
+ end
+end
+
+
+
+function addSetting(setting, number, newValue)
+
+ local set = getSetting(setting)
+
+ local get = fs.open("/home/settings/"..setting, "w")
+ 
+ 
+ 
+ 
+ set[number] = newValue
+ 
+ get.write( textutils.serialize(set) )
+ 
+ get.close()
+ 
+end
+
