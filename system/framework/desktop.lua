@@ -4,7 +4,8 @@ os.pullEvent = os.pullEventRaw
 
 --local function init()
 
-build = 69.3
+build = 70
+versionStr = "DeltaOS RC8"
 
 
 
@@ -156,7 +157,7 @@ local isAppOpen = false
 local redraw = false
 
 
-isUnstable = true
+
 os.loadAPI("/apis/users")
 
 
@@ -459,12 +460,11 @@ if ua then getIcons() end
 if grid then drawGrid() end
 drawApps()
 
-if isUnstable then
- term.current().setBackgroundColor( settings.getSetting("desktop", 3) )
- term.current().setCursorPos(kernel.x-string.len("DeltaOS RC7.1")+1, kernel.y)
- write("DeltaOS RC7.1")
- term.current().setCursorPos(1, 1)
-end
+term.current().setBackgroundColor( settings.getSetting("desktop", 3) )
+term.current().setCursorPos(kernel.x-string.len("DeltaOS RC7.1")+1, kernel.y)
+write(versionStr)
+term.current().setCursorPos(1, 1)
+
 
 term.setCursorPos(kernel.x-cUser:len()+1, 1)
 write(cUser)
