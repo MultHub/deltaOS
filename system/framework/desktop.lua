@@ -4,8 +4,8 @@ os.pullEvent = os.pullEventRaw
 
 --local function init()
 
-build = 70
-versionStr = "DeltaOS RC8"
+build = 71
+versionStr = "DeltaOS RC8.1"
 
 
 
@@ -118,14 +118,7 @@ function isTaken(x,y)
  return false
 end
 
-local message_http = http.get("http://kitttenservers.tk/delta_message.php")
-local msg
-if message_http then
-	msg = message_http.readAll()
-	message_http.close()
-else
-	msg = "Startup!"
-end
+
 
 function saveInfo()
  kernel.saveToFile(apps,"system/.appdata")
@@ -461,7 +454,7 @@ if grid then drawGrid() end
 drawApps()
 
 term.current().setBackgroundColor( settings.getSetting("desktop", 3) )
-term.current().setCursorPos(kernel.x-string.len("DeltaOS RC7.1")+1, kernel.y)
+term.current().setCursorPos(kernel.x-#versionStr+1, kernel.y)
 write(versionStr)
 term.current().setCursorPos(1, 1)
 
@@ -481,7 +474,6 @@ end
 
 draw()
 
-local d = Dialog.new(nil, nil, nil, nil, "Notification", {msg}, true,false)
 
 local function timeout(s)
  sleep(s)
