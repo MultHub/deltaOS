@@ -6,6 +6,8 @@ local w, h = term.getSize()
 _G.deltaOS = true
 --for programs who would like to know that is deltaOS or not installed
 
+local develop = true
+
 if shell then
  _G.shell = shell
 end
@@ -39,7 +41,7 @@ local function checkForUpdates()
  local filev = fs.open("version", "r")
  local build = tonumber( filev.readAll())
  filev.close()
- local latest = http.get("https://raw.githubusercontent.com/FlareHAX0R/deltaOS-unstable/master/version")
+ local latest = http.get("https://raw.githubusercontent.com/FlareHAX0R/deltaOS/master/version")
  local lb = latest.readAll()
  latest.close()
  if lb == nil or lb == nll then
@@ -114,7 +116,7 @@ graphics.cPrint("DeltaOS")
 
  
 
-if checkForUpdates() == true then
+if checkForUpdates() == true and develop == false then
  local d = Dialog.new(nil, nil, nil, nil, "DeltaOS", {"A update is avaiable,", "update now?"}, true,true)
  local result = d:autoCaptureEvents()
  if result == "ok" then

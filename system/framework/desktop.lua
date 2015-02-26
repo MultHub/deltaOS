@@ -4,8 +4,8 @@ os.pullEvent = os.pullEventRaw
 
 --local function init()
 
-build = 70
-versionStr = "DeltaOS RC8"
+build = 71
+versionStr = "DeltaOS RC8.1"
 
 
 
@@ -118,14 +118,7 @@ function isTaken(x,y)
  return false
 end
 
-local message_http = http.get("http://kitttenservers.tk/delta_message.php")
-local msg
-if message_http then
-	msg = message_http.readAll()
-	message_http.close()
-else
-	msg = "Startup!"
-end
+
 
 function saveInfo()
  kernel.saveToFile(apps,"system/.appdata")
@@ -415,7 +408,7 @@ local function drawApps()
     graphics.drawImage(apps[k].icon,(apps[k].x-1)*gridsze+2,(apps[k].y-1)*gridsze+3)
   end
   term.setCursorPos((apps[k].x-1)*gridsze+2,(apps[k].y-1)*gridsze+6)
-  term.setBackgroundColor(asel==k and colors.blue or colors.lightBlue)
+  term.setBackgroundColor(asel==k and colors.blue or settings.getSetting("desktop", 2))
   write(string.rep(" ",gridsze-1))
   term.setCursorPos((apps[k].x-1)*gridsze+2,(apps[k].y-1)*gridsze+6)
   term.setTextColor(colors.black)
@@ -424,7 +417,7 @@ local function drawApps()
 end
 
 local function drawGrid()
- term.setBackgroundColor(colors.lightBlue)
+ term.setBackgroundColor( settings.getSetting("desktop", 2) )
  for i=1,math.floor(width/gridsze)+1 do
   for j=2,height do
    term.setCursorPos((i-1)*gridsze+1,j)
@@ -461,7 +454,7 @@ if grid then drawGrid() end
 drawApps()
 
 term.current().setBackgroundColor( settings.getSetting("desktop", 3) )
-term.current().setCursorPos(kernel.x-string.len("DeltaOS RC7.1")+1, kernel.y)
+term.current().setCursorPos(kernel.x-#versionStr+1, kernel.y)
 write(versionStr)
 term.current().setCursorPos(1, 1)
 
@@ -481,7 +474,6 @@ end
 
 draw()
 
-local d = Dialog.new(nil, nil, nil, nil, "Notification", {msg}, true,false)
 
 local function timeout(s)
  sleep(s)
