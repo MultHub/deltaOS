@@ -408,7 +408,7 @@ local function drawApps()
     graphics.drawImage(apps[k].icon,(apps[k].x-1)*gridsze+2,(apps[k].y-1)*gridsze+3)
   end
   term.setCursorPos((apps[k].x-1)*gridsze+2,(apps[k].y-1)*gridsze+6)
-  term.setBackgroundColor(asel==k and colors.blue or colors.lightBlue)
+  term.setBackgroundColor(asel==k and colors.blue or settings.getSetting("desktop", 2))
   write(string.rep(" ",gridsze-1))
   term.setCursorPos((apps[k].x-1)*gridsze+2,(apps[k].y-1)*gridsze+6)
   term.setTextColor(colors.black)
@@ -417,7 +417,7 @@ local function drawApps()
 end
 
 local function drawGrid()
- term.setBackgroundColor(colors.lightBlue)
+ term.setBackgroundColor( settings.getSetting("desktop", 2) )
  for i=1,math.floor(width/gridsze)+1 do
   for j=2,height do
    term.setCursorPos((i-1)*gridsze+1,j)
