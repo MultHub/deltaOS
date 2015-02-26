@@ -6,7 +6,11 @@ local w, h = term.getSize()
 _G.deltaOS = true
 --for programs who would like to know that is deltaOS or not installed
 
+<<<<<<< HEAD
 _G.develop = true
+=======
+local develop = false
+>>>>>>> 54ba8b91158e928d57879ea8a4fce4834ebacfd9
 
 if shell then
  _G.shell = shell
@@ -39,7 +43,7 @@ end
 
 local function checkForUpdates()
  local filev = fs.open("version", "r")
- local build = tonumber( filev.readAll())
+ local build = tonumber( filev.readAll() )
  filev.close()
  local latest = http.get("https://raw.githubusercontent.com/FlareHAX0R/deltaOS/master/version")
  local lb = latest.readAll()

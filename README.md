@@ -3,17 +3,15 @@ DeltaOS
 
 DeltaOS files
 
-WARNING - UNSTABLE, BUT CONTAINS LATEST FEATURES.
+Master branch is the latest stable
+Develop is the latest unstable/nightl.y
 
-USE IF YOU DARE
-
-
-Join the IRC at https://webchat.esper.net/?channels=deltaos
-or the dev channel at https://webchat.esper.net/?channels=deltaos-dev
 
 Download
 =======
-http://pastebin.com/9FiUs9pZ
+http://pastebin.com/d0xWbiXM
 
 Or inside computercraft:
-pastebin run 9FiUs9pZ
+pastebin run d0xWbiXM
+
+Yes, I got permission from oeed to use his installer.
