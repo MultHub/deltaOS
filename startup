@@ -6,7 +6,7 @@ local w, h = term.getSize()
 _G.deltaOS = true
 --for programs who would like to know that is deltaOS or not installed
 
-local develop = true
+_G.develop = true
 
 if shell then
  _G.shell = shell
@@ -116,7 +116,7 @@ graphics.cPrint("DeltaOS")
 
  
 
-if checkForUpdates() == true and develop == false then
+if checkForUpdates() == true and _G.develop == false then
  local d = Dialog.new(nil, nil, nil, nil, "DeltaOS", {"A update is avaiable,", "update now?"}, true,true)
  local result = d:autoCaptureEvents()
  if result == "ok" then

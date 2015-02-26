@@ -8,14 +8,15 @@ This requires ElvishJerricco's JSON parsing API.
 Direct link: http://pastebin.com/raw.php?i=4nRg9CHU
 ]]--
  
-local args = {...}
+local args = {}
+
  
 
 --Remove the line above this and change the lines below to use automated mode.
 local automated = true                                                  -- Don't touch!
 local hide_progress = false                                             -- If true, will not list out files as they are downloaded
 args[1] = "FlareHAX0R"                                                 -- Github username
-args[2] = "DeltaOS-unstable"                                                               -- Github repo name
+args[2] = "DeltaOS                                                               -- Github repo name
 args[3] = nil                                                                   -- Branch - defaults to "master"
 args[4] = nil                                                                   -- Path - defaults to root ("/")
 local pre_dl = "graphics.cPrint('Starting update...')"  -- Command(s) to run before download starts.
@@ -23,6 +24,11 @@ local post_dl = "os.reboot()"   -- Command(s) to run after download completes.
 --Remove the line below this and change the lines below to use automated mode.
 
 args[3] = args[3] or "master"
+
+if _G.develop == true then
+ args[3] = "develop"
+end
+
 args[4] = args[4] or ""
  
 if not automated and #args < 2 then
