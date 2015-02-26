@@ -7,7 +7,7 @@ _G.deltaOS = true
 --for programs who would like to know that is deltaOS or not installed
 
 
-_G.develop = true
+_G.develop = false
 
 
 if shell then
