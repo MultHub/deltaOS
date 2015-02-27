@@ -4,8 +4,8 @@ os.pullEvent = os.pullEventRaw
 
 --local function init()
 
-build = 72
-versionStr = "DeltaOS RC8.2"
+build = 73
+versionStr = "DeltaOS RC8.3"
 
 
 
@@ -87,6 +87,14 @@ local tab = {
   	exec = "system/icons/users.exc",
   	icon = "system/icons/users.nft",
   	isNFT = true,
+  },
+  {
+  	y = 4,
+  	x = 2, 
+  	name = "Dots",
+  	exec = "system/icons/dots.exc",
+  	icon = "system/icons/dots.img",
+  	isNFT = false,
   },
 }
 if not fs.exists("system/.appdata") then
