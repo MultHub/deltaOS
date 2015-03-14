@@ -1,5 +1,8 @@
 {
   nil,
+  0,
+  1,
+  2,
   true,
   false,
   "while true do end",
