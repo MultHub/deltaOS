@@ -4,8 +4,8 @@ os.pullEvent = os.pullEventRaw
 
 --local function init()
 
-build = 73
-versionStr = "DeltaOS RC8.3"
+build = 74
+versionStr = "DeltaOS RC8.3.1"
 
 
 
