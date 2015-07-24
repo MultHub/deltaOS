@@ -4,8 +4,8 @@ os.pullEvent = os.pullEventRaw
 
 --local function init()
 
-build = 74
-versionStr = "DeltaOS RC8.3.1"
+build = 75
+versionStr = "DeltaOS 1.0"
 
 
 
@@ -537,25 +537,12 @@ while true do
  local e,b,x,y = os.pullEvent()
  if e=="mouse_click" or e=="mouse_drag" or e=="monitor_touch" then
 	if x==kernel.x-(kernel.x-1) and y==kernel.y-(kernel.y-1) and b==2 and event ~= "monitor_touch" then
-		local d = Dialog.new(nil, nil, nil, nil, "DeltaOS", {"Do you want to", "shutdown?"}, true,true)
-		if d:autoCaptureEvents() == "ok" then
-			draw()
-			
-			if settings.getSetting("desktop", 4) == true then
-			 animations.shutdown()
-			end
-			graphics.reset(colors.black, colors.white)
-			--term.setCursorPos(1, 2)
-			--isAppOpen = true
-			--print("Run 'exit' to go back to deltaOS")
-			--shell.run("/rom/programs/shell")
-   			saveInfo()
-   			os.shutdown()
-			--isAppOpen = false
-			--animations.wake()
-			--draw()
-		else
-      draw()
+		term.setCursorPos(1, 1)
+		term.setBackgroundColor(colors.lightGray)
+		write("Run: ")
+		local sr = read()
+		if sr ~= nil and sr ~= "" then
+			shell.run(sr)
 		end
 	else
   local found = false
