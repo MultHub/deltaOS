@@ -4,8 +4,8 @@ os.pullEvent = os.pullEventRaw
 
 --local function init()
 
-build = 75
-versionStr = "DeltaOS 1.0"
+build = 76
+versionStr = "DeltaOS 1.0.1"
 
 
 
@@ -90,7 +90,7 @@ local tab = {
   },
   {
   	y = 4,
-  	x = 2, 
+  	x = 2,
   	name = "Dots",
   	exec = "system/icons/dots.exc",
   	icon = "system/icons/dots.img",
@@ -102,7 +102,7 @@ if not fs.exists("system/.appdata") then
 	hand.write(textutils.serialize(tab))
 	hand.close()
 end
-		
+
 rdnt = false
 appsdir = "system/apps"
 appsfle = "system/.appdata"
@@ -142,11 +142,11 @@ local function getIcons()
   local fnd = false
   for j=1,#apps do
    if apps[j].exec==tab[i].exec then
-    fnd = true	
+    fnd = true
    end
   end
   if not fnd then
-   table.insert(apps,tab[i])	
+   table.insert(apps,tab[i])
   end
  end
  m.close()
@@ -164,7 +164,7 @@ os.loadAPI("/apis/users")
 
 local function getC()
  return term.current()
- 
+
 end
 
 local gc = getC()
@@ -172,28 +172,28 @@ local function loginScr()
 
 local function maxRead(w,c,str)
 	w = w and w-1 or 10
-	
+
 	term.setCursorBlink(true)
 	local x,y = term.getCursorPos() --get original cursor x,y
-	
+
 	local s = str or "" --string
 	local ds = "" --displayed string
-	
+
 	ds = s
 	if (c) then
 		ds = string.rep(c,#s)
 	end
-	
+
 	term.setCursorPos(x,y)
 	term.write(string.rep(" ",w+1))
 	term.setCursorPos(x,y)
 	term.write(string.sub(ds,(#s-w >= 1) and #s-w or 1,#s))
-	
+
 	local toNext
-	
+
 	while true do --main loop
 		local e,p,cx,cy = os.pullEventRaw() --pull event
-		
+
 		if e == "char" then --character was pressed
 			s = s..p --append typed character to string
 		elseif e == "key" then --key was pressed
@@ -208,18 +208,18 @@ local function maxRead(w,c,str)
 				break
 			end
 		end
-		
+
 		ds = s
 		if (c) then
 			ds = string.rep(c,#s)
 		end
-		
+
 		term.setCursorPos(x,y)
 		term.write(string.rep(" ",w+1))
 		term.setCursorPos(x,y)
 		term.write(string.sub(ds,(#s-w >= 1) and #s-w or 1,#s))
 	end
-	
+
 	term.setCursorBlink(false)
 	return s,toNext --return the string
 end
@@ -323,7 +323,7 @@ while true do
 				term.setCursorPos(2,4)
 				local toNext
 				username,toNext = maxRead(w-2,nil,username)
-				
+
 				if (toNext) then
 					os.queueEvent("mouse_click",1,2,7)
 				end
@@ -331,7 +331,7 @@ while true do
 				term.setBackgroundColor(colors.lightGray)
 				term.setCursorPos(2,7)
 				password = maxRead(w-2,"*",password)
-				
+
 				--click the login button
 				os.queueEvent("mouse_click",1,login.x,login.y)
 			end
@@ -343,14 +343,14 @@ while true do
       	end
 				users.login(username)
 				break
-				
-			else 
+
+			else
 				term.setCursorPos(1, 1)
 				term.setTextColor(colors.red)
 				graphics.cPrint("Invalid username and/or password")
 				term.setTextColor(colors.black)
 			end
-			
+
 		elseif (shutdown:isClicked(x,y)) then
 			os.shutdown()
 		end
@@ -365,7 +365,7 @@ loginScr()
 
 if settings.getSetting("desktop", 4) == true then
  animations.wake()
-end	
+end
 
 
 
@@ -439,7 +439,7 @@ local function drawGrid()
 end
 
 local function draw(ua)
-	
+
 local cUser = users.getUserName()
 
 local isI = false
@@ -452,7 +452,7 @@ elseif settings.getSetting("desktop", 1) == "image" then
 	graphics.drawImage(imgPath, 1, 2)
 end
 graphics.drawLine( kernel.y, settings.getSetting("desktop", 3) )
-	
+
 
 term.current().setCursorPos(kernel.x-(kernel.x-1), 1)
 if ua==nil then ua=true end
@@ -520,7 +520,7 @@ end
 function isTaken(x,y)
  for k,v in pairs(apps) do
   if apps[k]["x"]==x and apps[k]["y"]==y then
-   return true 
+   return true
   end
  end
  return false
@@ -532,7 +532,7 @@ end
 -- return math.floor(x/gridsze),math.floor(y/gridsze)
 --end
 
-local function shellServ() 
+local function shellServ()
 while true do
  local e,b,x,y = os.pullEvent()
  if e=="mouse_click" or e=="mouse_drag" or e=="monitor_touch" then
@@ -550,7 +550,7 @@ while true do
    local xs,ys = (apps[k].x-1)*gridsze,(apps[k].y-1)*gridsze
    --local xs,ys = 3,4
    --print(kernal.inSpan) read()
-   
+
    if kernel.inSpan(xs+2,ys+3,xs+5,ys+6,x,y) then
     if e=="mouse_drag" then
      if asel~=k then asel=k;draw(false) end
@@ -563,7 +563,7 @@ while true do
        end
        graphics.reset(colors.black,colors.white)
        os.pullEvent = oldPullEvent
-       
+
        if settings.getSetting("desktop", 5) == true then
         local tID = shell.openTab(apps[k]["exec"])
         shell.switchTab(tID)
@@ -581,7 +581,7 @@ while true do
      else
       asel=k
       draw()
-     end 
+     end
      lclk=os.clock()
     end
     found=true
@@ -621,7 +621,7 @@ local function sleepServ()
  			 animations.wake()
  			end
  			os.sleep(0.1)
- 		
+
  			draw()
  		end
  	end
@@ -635,73 +635,9 @@ local function firewall()
  shell.run("/system/digitalarmor/firewall")
 end
 
-local function PaP()
-  while true do
-    local event, side = os.pullEvent("peripheral")
-    if side ~= nil then
-      local win = dwin.cWindow(27, 10)
-      local per = peripheral.getType(side)
-      if per == "modem" and peripheral.call(side, "isWireless") == true then
-        per = "Wireless Modem"
-      elseif per == "modem" and peripheral.call(side, "isWireless") ~= true then
-        per = "Wired Modem"
-      end
-      if per == "monitor" and peripheral.call(side, "isColor") == true then
-        per = "Adv. Monitor"
-      elseif per == "monitor" and peripheral.call(side, "isColor") ~= true then
-        per = "Monitor"
-      end
-      if per == "chatbox" then
-        per = "Chatbox"
-      end
-      if per == "drive" then
-        per = "Disk Drive"
-      end
-      if per == "nil" or per == nil then
-        per = "Unknown"
-      end
-      if per == "printer" then
-        per = "Printer"
-      end
-      if per == "computer" then
-        per = "Computer"
-      end
-      if per == "turtle" then
-        per = "Turtle"
-      end
-      if per == "command" then
-      	per = "Command Block"
-      end
-
-      graphics.red_reset(win, colors.white, colors.black)
-      graphics.red_drawLine(win, 1, colors.lightGray)
-      graphics.red_cPrint(win, "Plug & Play", 1)
-      win.setBackgroundColor(colors.white)
-      win.setTextColor(colors.black)
-      win.setCursorPos(1, 2)
-      win.write("A device has been attached")
-      graphics.red_cPrint(win, "The device type is:", 3)
-      graphics.red_cPrint(win, per, 4)
-
-      graphics.red_cPrint(win, "Click anywhere or press", 6)
-      graphics.red_cPrint(win, "ENTER to return.", 7)
-      while true do
-        local event, char = os.pullEvent()
-        if event == "key" and char == 28 then
-          draw()
-          break
-        elseif event == "mouse_click" then
-          break
-        end
-      end
 
 
-
-    end
-  end
-end
-
-parallel.waitForAll(sleepServ, shellServ, firewall, PaP)
+parallel.waitForAll(sleepServ, shellServ, firewall)
 end
 
 
@@ -709,7 +645,7 @@ end
 
 
 
-kernel.extendedCatnip(mainDesktop)  
+kernel.extendedCatnip(mainDesktop)
 
 kernel.saveToFile(apps,"system/.appdata")
 --end
