@@ -22,7 +22,7 @@ function _G.os.shutdown()
                 function()
 					loadfile( "/rom/programs/shell" )()
                 end,
-                function() os.loadAPI("/system/digitalarmor/rednet") rednet.run() end --commment this line to deactivate rednet
+                function() os.loadAPI("/system/da2/rednet") rednet.run() end --commment this line to deactivate rednet
                 )
         end )
 
