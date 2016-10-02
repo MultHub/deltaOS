@@ -3,7 +3,7 @@ os.pullEvent = os.pullEventRaw
 local w, h = term.getSize()
 
 --ik this isn't needed, but I hate putting the desktop env in startup.
-_G.deltaOS = true
+_G.delta = {}
 --for programs who would like to know that is deltaOS or not installed
 
 term.redirect( term.native() )
@@ -44,6 +44,9 @@ if settings.getSetting("monitor", 1) == true then
     term.redirect(monitorWrap)
  end
 end]]--
+
+  term.clear()
+  term.setCursorPos(1,1)
 
   shell.run("/system/launchpad.lua")
 end
